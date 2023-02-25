@@ -1,7 +1,8 @@
 import React from "react";
 import './Header.css';
 import logo from './OLX-Symbol.png'
-function Header() {
+function Header({setlogin}) {
+
   return (
     <div>
       <header className="header">
@@ -30,7 +31,10 @@ function Header() {
             </i>
           </div>
           <div className="header-login">
-            <a href="#">
+            <a href="#" onClick={(e)=>{
+              e.preventDefault();
+              setlogin((prevlogin)=>!prevlogin)
+            }}>
               <span>
                 <strong>Login</strong>
               </span>
