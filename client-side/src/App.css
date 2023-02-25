@@ -1,0 +1,10 @@
+a {
+    text-decoration: initial;
+    color: var(--bs-black);
+  }
+  
+  a:hover {
+    color: var(--bs-black);
+    /*border-width: 6px;*/
+    /*border-style: solid;*/
+  }
