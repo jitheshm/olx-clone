@@ -27,6 +27,18 @@ router.post('/otpcheck', (req, res) => {
     res.json({ message: "code expired" });
   })
 
+});
+
+router.post('/signup', (req, res) => {
+  // console.log(req.body);
+  userHelper.signup(req.body).then(() => {
+    res.json()
+  })
+});
+router.post('/login', (req, res) => {
+  userHelper.login(req.body).then((result) => {
+    res.json(result)
+  })
 })
 
 

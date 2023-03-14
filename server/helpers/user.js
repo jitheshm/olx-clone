@@ -1,10 +1,13 @@
 require('dotenv').config()
+const bcrypt = require('bcrypt');
+const dbCollection = require('../config/dbCollection');
+const db = require('../config/connection')
 
 const { accountSid, authToken, serviceSid } = process.env
 //console.log(accountSid,authToken,serviceSid);
 const client = require('twilio')(accountSid, authToken);
 module.exports = {
-    generateOtp: ({mobile}) => {
+    generateOtp: ({ mobile }) => {
 
         return new Promise((resolve, reject) => {
             //console.log( `+91${mobile}`);
@@ -34,5 +37,31 @@ module.exports = {
                     reject(err);
                 })
         })
+    },
+
+    signup: ({ mobile, password }) => {
+        return new Promise((resolve, reject) => {
+            bcrypt.hash(password, 10).then((hash) => {
+                db.get().collection(dbCollection.userCollection).insertOne({ mobile: mobile, password: hash }).then((obj) => {
+                    console.log(obj);
+                    resolve()
+                })
+            });
+        })
+
+
+    },
+
+    login: ({ mobile, password }) => {
+        return new Promise((resolve, reject) => {
+            db.get().collection(dbCollection.userCollection).findOne({ mobile: mobile }).then((data) => {
+                console.log(data);
+                bcrypt.compare(password,data.password).then((result)=>{
+                    resolve(result)
+                });
+            })
+
+        })
+
     }
 }
