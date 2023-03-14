@@ -7,7 +7,7 @@ const userHelper = require('../helpers/user');
 
 router.post('/loginsms', function (req, res, next) {
   console.log(req.body);
-  userHelper.generateOtp(req.body.mobile).then((verificationSid) => {
+  userHelper.generateOtp(req.body).then((verificationSid) => {
     console.log(`otp send successfully id:${verificationSid}`);
     res.json({ otpsend: true })
   }).catch((err) => {
