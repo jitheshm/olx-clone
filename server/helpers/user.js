@@ -56,9 +56,12 @@ module.exports = {
         return new Promise((resolve, reject) => {
             db.get().collection(dbCollection.userCollection).findOne({ mobile: mobile }).then((data) => {
                 console.log(data);
+                if(data){
                 bcrypt.compare(password,data.password).then((result)=>{
                     resolve(result)
-                });
+                });}
+                else
+                resolve(false)
             })
 
         })
