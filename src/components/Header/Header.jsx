@@ -3,9 +3,11 @@ import olxLogo from '../../assets/OLX-Symbol.png'
 import './Header.css'
 import SellButton from '../../assets/SellButton'
 import SellButtonPlus from '../../assets/SellButtonPlus'
-import Signup from '../Login/Login'
+import Login from '../Login/Login'
+import Signup from '../Signup/Signup'
 function Header() {
     const [login, setLogin] = useState(false)
+    const [signup, setSignup] = useState(false)
     return (
         <>
 
@@ -54,7 +56,10 @@ function Header() {
             </div>
 
             {
-                login && <Signup />
+                login && <Login login={login} setLogin={setLogin} signup={signup} setSignup={setSignup} />
+            }
+            {
+                signup && <Signup login={login} setLogin={setLogin} signup={signup} setSignup={setSignup} />
             }
         </>
     )

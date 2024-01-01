@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../assets/OLX-Symbol.png'
 import './Login.css'
-function Login() {
+function Login({login,setLogin,signup,setSignup}) {
     return (
         <div className='loginContainer'>
             <div className='col-4 login pt-4 m-auto'> 
@@ -17,6 +17,12 @@ function Login() {
                         <button type='submit' className='col-11 mt-4 btn ' style={{height:'50px', backgroundColor:'#002F34',color:'#ffffff'}}>submit</button>
 
                     </form>
+                </div>
+                <div>
+                    <button onClick={()=>{
+                       setLogin(false)
+                        setSignup(true)
+                    }} className='btn mt-4'>Create an Account</button>
                 </div>
             </div>
         </div>
