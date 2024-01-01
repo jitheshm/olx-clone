@@ -1,18 +1,22 @@
 import React from 'react'
+import Home from './pages/Home'
 // import './App.css'
-import Header from './components/Header/Header'
-import Menu from './components/Menu/Menu'
-import Posts from './components/Posts/Post'
-import Footer from './components/Footer/Footer'
-import Signup from './components/Signup/Signup'
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import Header from './components/Header/Header';
 function App() {
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <Home />,
+    },
+  ]);
   return (
     <>
       <Header />
-      <Menu />
-      <Posts/>
-      <Footer/>
-      <Signup/>
+      <RouterProvider router={router} />
     </>
   )
 }

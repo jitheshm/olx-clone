@@ -1,7 +1,7 @@
 import React from 'react'
 import logo from '../../assets/OLX-Symbol.png'
-import './Signup.css'
-function Signup() {
+import './Login.css'
+function Login() {
     return (
         <div className='loginContainer'>
             <div className='col-4 login pt-4 m-auto'> 
@@ -23,4 +23,4 @@ function Signup() {
     )
 }
 
-export default Signup
+export default Login

@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import olxLogo from '../../assets/OLX-Symbol.png'
 import './Header.css'
 import SellButton from '../../assets/SellButton'
 import SellButtonPlus from '../../assets/SellButtonPlus'
+import Signup from '../Login/Login'
 function Header() {
+    const [login, setLogin] = useState(false)
     return (
         <>
 
@@ -34,22 +36,26 @@ function Header() {
                     </div>
 
                     <a href="#" className='loginbtn' onClick={(e) => {
-
+                        setLogin((prev)=>!prev)
                     }}>
                         <span>
                             <strong>Login</strong>
                         </span>
                     </a>
                     <div className="sellMenu">
-                        <SellButton></SellButton> 
+                        <SellButton></SellButton>
                         <div className="sellMenuContent">
-                            <SellButtonPlus></SellButtonPlus> 
+                            <SellButtonPlus></SellButtonPlus>
                             <span>SELL</span>
                         </div>
                     </div>
 
                 </div>
             </div>
+
+            {
+                login && <Signup />
+            }
         </>
     )
 }
