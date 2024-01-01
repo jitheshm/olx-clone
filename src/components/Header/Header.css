@@ -1,0 +1,117 @@
+.navbar1 {
+  padding-left: 25px;
+  padding-right: 20px;
+  height: 69px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  background-color: #EFF1F3;
+}
+
+.navbarHead {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+img {
+  height: 25px;
+  width: auto;
+}
+
+.search {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.searchLocation {
+  background-color: #FFFFFF;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 4px;
+  border-color: #002f34;
+  border-width: 2px;
+  border-style: solid;
+}
+
+.navInput {
+  border-style: none;
+  outline: none;
+}
+
+.itemSearch {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 4px;
+  border-color: #002f34;
+  border-width: 2px;
+  border-style: solid;
+  background-color: #FFFFFF;
+}
+
+.searchIcon {
+  background-color: #002f34;
+  min-width: 40px;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: #FFFFFF;
+  font-size: 25px;
+}
+
+.language {
+  display: flex;
+  align-items: center;
+  color: #002f34;
+}
+
+.loginbtn {
+  padding-left: 11px;
+  padding-right: 11px;
+  font-size: 18px;
+}
+
+.sellMenu {
+  position: relative;
+  cursor: pointer;
+}
+
+.sellMenu .all {
+  fill: white;
+}
+
+.sellMenu .top {
+  fill: #23e5db;
+}
+
+.sellMenu .left {
+  fill: #ffce32;
+}
+
+.sellMenu .right {
+  fill: #3a77ff;
+}
+
+.sellMenu .sellMenuContent {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #002f34;
+}
+
+/* .sellMenu .sellMenuContent svg {
+    align-items: center;
+  } */
+.sellMenu .sellMenuContent span {
+  margin-left: 5px;
+}
