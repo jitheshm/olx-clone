@@ -5,9 +5,9 @@ import { firebaseContext } from './store/firebaseContext.jsx';
 import {app as firebase} from './firebase/config.jsx'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <firebaseContext.provider value={{firebase}}>
+    <firebaseContext.Provider value={{firebase}}>
 
       <App />
-    </firebaseContext.provider>
+    </firebaseContext.Provider>
   </React.StrictMode>,
 )
