@@ -55,7 +55,7 @@ function Header() {
 
                         user ? <div className="dropdown">
                             <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                {user}
+                                {user.name}
                             </button>
                             <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                 <a className="dropdown-item" onClick={handleLogout}>Logout</a>

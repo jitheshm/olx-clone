@@ -26,7 +26,8 @@ function Signup({ login, setLogin, signup, setSignup }) {
             await updateProfile(auth.currentUser, {
                 displayName: name
             })
-            setUser(name)
+            console.log(userCredential.user);
+            setUser({name,id:userCredential.user.uid})
             setSignup(false)
             console.log(userCredential);
             const docRef = await addDoc(collection(db, "users"), {
