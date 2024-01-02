@@ -1,13 +1,16 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import olxLogo from '../../assets/OLX-Symbol.png'
 import './Header.css'
 import SellButton from '../../assets/SellButton'
 import SellButtonPlus from '../../assets/SellButtonPlus'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
+import { userContext } from '../../store/userContext'
 function Header() {
     const [login, setLogin] = useState(false)
     const [signup, setSignup] = useState(false)
+    const { user } = useContext(userContext)
+    console.log("header"+user);
     return (
         <>
 
@@ -37,13 +40,16 @@ function Header() {
 
                     </div>
 
-                    <a href="#" className='loginbtn' onClick={(e) => {
-                        setLogin((prev)=>!prev)
-                    }}>
-                        <span>
-                            <strong>Login</strong>
-                        </span>
-                    </a>
+                    {
+                        
+                        user ?<div>{user}</div>: <a href="#" className='loginbtn' onClick={(e) => {
+                            setLogin((prev) => !prev)
+                        }}>
+                            <span>
+                                <strong>Login</strong>
+                            </span>
+                        </a>
+                    }
                     <div className="sellMenu">
                         <SellButton></SellButton>
                         <div className="sellMenuContent">

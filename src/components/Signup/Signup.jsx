@@ -2,31 +2,49 @@ import React, { useContext, useState } from 'react'
 import logo from '../../assets/OLX-Symbol.png'
 import './Signup.css'
 import { firebaseContext } from '../../store/firebaseContext'
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-
-function Signup() {
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { userContext } from '../../store/userContext';
+import { collection, addDoc, getFirestore } from "firebase/firestore";
+function Signup({ login, setLogin, signup, setSignup }) {
     const [name, setName] = useState('')
     const [phoneno, setPhoneno] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const { firebase } = useContext(firebaseContext)
-    const handleSubmit = (e) => {
-        e.preventDefault()
-        
-        
+    const { user, setUser } = useContext(userContext)
+
+    const handleSubmit = async (e) => {
         const auth = getAuth(firebase);
-        createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed up 
-                console.log(userCredential);
-                const user = userCredential.user;
-                // ...
+        const db = getFirestore(firebase);
+        try {
+            e.preventDefault()
+
+
+
+
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password)
+            await updateProfile(auth.currentUser, {
+                displayName: name
             })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // ..
+            setUser(name)
+            setSignup(false)
+            console.log(userCredential);
+            const docRef = await addDoc(collection(db, "users"), {
+                id: userCredential.user.uid,
+                name: name,
+                phoneno: phoneno,
+                email: email
+
+
             });
+            console.log("Document written with ID: ", docRef.id); 
+
+
+        } catch (error) {
+            console.log(error);
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        }
     }
     return (
         <div className='loginContainer'>
