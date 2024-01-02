@@ -5,7 +5,7 @@ import SellButton from '../../assets/SellButton'
 import SellButtonPlus from '../../assets/SellButtonPlus'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
-import { userContext } from '../../store/userContext'
+import { userContext } from '../../store/Context'
 import { getAuth, signOut } from 'firebase/auth'
 function Header() {
     const [login, setLogin] = useState(false)

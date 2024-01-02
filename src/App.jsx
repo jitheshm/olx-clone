@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Header from './components/Header/Header';
-import { userContext } from './store/userContext';
+import { userContext } from './store/Context';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 function App() {
   const [user, setUser] = useState(null)

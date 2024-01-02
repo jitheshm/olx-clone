@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react'
 import logo from '../../assets/OLX-Symbol.png'
 import './Signup.css'
-import { firebaseContext } from '../../store/firebaseContext'
+import { firebaseContext,userContext } from '../../store/Context'
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { userContext } from '../../store/userContext';
+
 import { collection, addDoc, getFirestore } from "firebase/firestore";
 function Signup({ login, setLogin, signup, setSignup }) {
     const [name, setName] = useState('')
