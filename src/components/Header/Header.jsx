@@ -6,11 +6,22 @@ import SellButtonPlus from '../../assets/SellButtonPlus'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
 import { userContext } from '../../store/userContext'
+import { getAuth, signOut } from 'firebase/auth'
 function Header() {
     const [login, setLogin] = useState(false)
     const [signup, setSignup] = useState(false)
     const { user } = useContext(userContext)
-    console.log("header"+user);
+    console.log("header" + user);
+
+    const handleLogout = async() => {
+        try {
+            const auth = getAuth();
+            await signOut(auth)
+            console.log("successfully logout");
+        } catch (error) {
+            console.log(error);
+        }
+    }
     return (
         <>
 
@@ -41,14 +52,23 @@ function Header() {
                     </div>
 
                     {
-                        
-                        user ?<div>{user}</div>: <a href="#" className='loginbtn' onClick={(e) => {
-                            setLogin((prev) => !prev)
-                        }}>
-                            <span>
-                                <strong>Login</strong>
-                            </span>
-                        </a>
+
+                        user ? <div className="dropdown">
+                            <button className="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {user}
+                            </button>
+                            <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a className="dropdown-item" onClick={handleLogout}>Logout</a>
+
+                            </div>
+                        </div>
+                            : <a href="#" className='loginbtn' onClick={(e) => {
+                                setLogin((prev) => !prev)
+                            }}>
+                                <span>
+                                    <strong>Login</strong>
+                                </span>
+                            </a>
                     }
                     <div className="sellMenu">
                         <SellButton></SellButton>
