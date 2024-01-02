@@ -5,17 +5,18 @@ import SellButton from '../../assets/SellButton'
 import SellButtonPlus from '../../assets/SellButtonPlus'
 import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
-import { userContext } from '../../store/Context'
+import { firebaseContext, userContext } from '../../store/Context'
 import { getAuth, signOut } from 'firebase/auth'
 function Header() {
     const [login, setLogin] = useState(false)
     const [signup, setSignup] = useState(false)
     const { user } = useContext(userContext)
+    const { firebase } = useContext(firebaseContext)
     console.log("header" + user);
 
     const handleLogout = async() => {
         try {
-            const auth = getAuth();
+            const auth = getAuth(firebase);
             await signOut(auth)
             console.log("successfully logout");
         } catch (error) {
