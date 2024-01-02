@@ -2,35 +2,15 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import Heart from '../../assets/Heart';
 import './Post.css';
-import { firebaseContext } from '../../store/Context';
+import { firebaseContext, productContext } from '../../store/Context';
 import { collection, doc, getDoc, getDocs, getFirestore } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 function Post() {
-  const [products, setProducts] = useState([])
+
   const { firebase } = useContext(firebaseContext)
-  useEffect(() => {
-    try {
-      (async function () {
-        const db = getFirestore(firebase);
-        const querySnapshot = await getDocs(collection(db, "products"));
-        const allpost=[]
-        querySnapshot.forEach((doc) => {
-          // doc.data() is never undefined for query doc snapshots
-          //console.log(doc.id, " => ", doc.data());
-          allpost.push({
-            ...doc.data(),
-            id:doc.id
-          })
-        });
-        setProducts(allpost)
-      })()
-    } catch (error) {
-      console.log(error);
-    }
+  const { products } = useContext(productContext)
+  const navigate = useNavigate()
 
-
-
-  }, [])
- 
 
 
   return (
@@ -45,7 +25,9 @@ function Post() {
             products.map((product) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <div className="card">
+                <div className="card" onClick={() => {
+                  navigate(`/item?id=${product.id}`)
+                }}>
                   <div className="favorite">
                     <Heart></Heart>
                   </div>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Home from './pages/Home'
 // import './App.css'
 import {
@@ -6,17 +6,39 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Header from './components/Header/Header';
-import { userContext } from './store/Context';
+import { userContext, productContext,firebaseContext } from './store/Context';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Create from './components/Create/Create';
 import Sell from './pages/Sell';
+import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import ViewPost from './components/ViewPost/ViewPost';
 function App() {
   const [user, setUser] = useState(null)
+  const [products, setProducts] = useState([])
+  const {firebase}=useContext(firebaseContext)
   useEffect(() => {
-    console.log("iam user" + user);
+    try {
+      (async function () {
+        const db = getFirestore(firebase);
+        const querySnapshot = await getDocs(collection(db, "products"));
+        const allpost = []
+        querySnapshot.forEach((doc) => {
+          // doc.data() is never undefined for query doc snapshots
+          //console.log(doc.id, " => ", doc.data());
+          allpost.push({
+            ...doc.data(),
+            id: doc.id
+          })
+        });
+        setProducts(allpost)
+      })()
+    } catch (error) {
+      console.log(error);
+    }
 
 
-  }, [user])
+
+  }, [])
 
   useEffect(() => {
     const auth = getAuth();
@@ -47,13 +69,19 @@ function App() {
     {
       path: '/create',
       element: <Sell />
+    },
+    {
+      path:'/item',
+      element:<ViewPost/> 
     }
   ]);
   return (
     <userContext.Provider value={{ user, setUser }}>
+      <productContext.Provider value={{ products, setProducts }} >
+        <RouterProvider router={router} />
 
-      
-      <RouterProvider router={router} />
+      </productContext.Provider>
+
 
     </userContext.Provider>
   )
