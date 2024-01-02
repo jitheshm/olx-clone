@@ -9,6 +9,7 @@ import Header from './components/Header/Header';
 import { userContext } from './store/Context';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Create from './components/Create/Create';
+import Sell from './pages/Sell';
 function App() {
   const [user, setUser] = useState(null)
   useEffect(() => {
@@ -45,13 +46,13 @@ function App() {
     },
     {
       path: '/create',
-      element: <Create />
+      element: <Sell />
     }
   ]);
   return (
     <userContext.Provider value={{ user, setUser }}>
 
-      <Header />
+      
       <RouterProvider router={router} />
 
     </userContext.Provider>

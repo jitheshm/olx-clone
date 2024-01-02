@@ -7,6 +7,7 @@ import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
 import { firebaseContext, userContext } from '../../store/Context'
 import { getAuth, signOut } from 'firebase/auth'
+import { Link } from 'react-router-dom'
 function Header() {
     const [login, setLogin] = useState(false)
     const [signup, setSignup] = useState(false)
@@ -71,13 +72,13 @@ function Header() {
                                 </span>
                             </a>
                     }
-                    <div className="sellMenu">
+                    <Link className="sellMenu" to='/create'>
                         <SellButton></SellButton>
                         <div className="sellMenuContent">
                             <SellButtonPlus></SellButtonPlus>
                             <span>SELL</span>
                         </div>
-                    </div>
+                    </Link>
 
                 </div>
             </div>
