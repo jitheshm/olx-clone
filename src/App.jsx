@@ -8,6 +8,7 @@ import {
 import Header from './components/Header/Header';
 import { userContext } from './store/Context';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import Create from './components/Create/Create';
 function App() {
   const [user, setUser] = useState(null)
   useEffect(() => {
@@ -23,14 +24,14 @@ function App() {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         if (authuser.displayName)
-          setUser({name:authuser.displayName,id:authuser.uid})
+          setUser({ name: authuser.displayName, id: authuser.uid })
 
         // console.log(JSON.stringify(authuser));
         // ...
       } else {
         // User is signed out
         // ...
-        setUser(null) 
+        setUser(null)
       }
     });
 
@@ -42,6 +43,10 @@ function App() {
       path: "/",
       element: <Home />,
     },
+    {
+      path: '/create',
+      element: <Create />
+    }
   ]);
   return (
     <userContext.Provider value={{ user, setUser }}>
