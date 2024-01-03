@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import './Create.css'
 import { firebaseContext, userContext } from '../../store/Context'
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
@@ -12,13 +12,16 @@ function Create() {
     const { firebase } = useContext(firebaseContext)
     const { user } = useContext(userContext)
     const navigate = useNavigate()
+
+   
+
     const handleSubmit = async () => {
 
         try {
             const date = new Date()
             const storage = getStorage(firebase)
             const db = getFirestore(firebase);
-            const storageRef = ref(storage, 'images');
+            const storageRef = ref(storage, `images/${pimg.name}`);
             const imgRef = await uploadBytes(storageRef, pimg)
             const imgUrl = await getDownloadURL(imgRef.ref)
             console.log(imgUrl);

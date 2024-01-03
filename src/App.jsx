@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useLayoutEffect } from 'react'
 import Home from './pages/Home'
 // import './App.css'
 import {
@@ -19,6 +19,30 @@ function App() {
   const [products, setProducts] = useState([])
   const [login, setLogin] = useState(false)
   const { firebase } = useContext(firebaseContext)
+  useLayoutEffect(() => {
+    const auth = getAuth();
+    console.log("parent");
+    const listener=onAuthStateChanged(auth, (authuser) => {
+      console.log(authuser);
+      if (authuser) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/auth.user
+        if (authuser.displayName)
+          setUser({ name: authuser.displayName, id: authuser.uid })
+
+        // console.log(JSON.stringify(authuser));
+        // ...
+      } else {
+        // User is signed out
+        // ...
+        setUser(null)
+      }
+    });
+    return () => {
+      listener();
+    }
+
+  }, [])
   useEffect(() => {
     try {
       (async function () {
@@ -43,26 +67,7 @@ function App() {
 
   }, [])
 
-  useEffect(() => {
-    const auth = getAuth();
-    const unsubscribe = onAuthStateChanged(auth, (authuser) => {
-      if (authuser) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/auth.user
-        if (authuser.displayName)
-          setUser({ name: authuser.displayName, id: authuser.uid })
 
-        // console.log(JSON.stringify(authuser));
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        setUser(null)
-      }
-    });
-
-
-  }, [])
 
   const router = createBrowserRouter([
     {
@@ -73,7 +78,7 @@ function App() {
       path: '/create',
       element: <ProtectRoute> <Sell /> </ProtectRoute>
     },
-    { 
+    {
       path: '/item/:id',
       element: <ViewPost />
     }

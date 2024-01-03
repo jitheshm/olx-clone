@@ -8,6 +8,7 @@ function ProtectRoute({ children }) {
     const navigate = useNavigate()
     console.log("ff" + user)
     useEffect(() => {
+        console.log("child");
         if (user === null) {
 
             navigate('/')
@@ -16,7 +17,7 @@ function ProtectRoute({ children }) {
         } else {
             setAllow(true)
         }
-    }, [])
+    }, [user])
 
     return <>{allow && children}</>
 }

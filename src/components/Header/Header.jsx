@@ -10,15 +10,15 @@ import { getAuth, signOut } from 'firebase/auth'
 import { Link, useNavigate } from 'react-router-dom'
 import { layoutContext } from '../../store/Context'
 function Header() {
-   
+
     const [signup, setSignup] = useState(false)
     const { user } = useContext(userContext)
     const { firebase } = useContext(firebaseContext)
-    const {login,setLogin}=useContext(layoutContext)
-    const navigate=useNavigate()
+    const { login, setLogin } = useContext(layoutContext)
+    const navigate = useNavigate()
     console.log("header" + user);
 
-    const handleLogout = async() => {
+    const handleLogout = async () => {
         try {
             const auth = getAuth(firebase);
             await signOut(auth)
@@ -88,7 +88,7 @@ function Header() {
             </div>
 
             {
-                login && <Login login={login} setLogin={setLogin} signup={signup} setSignup={setSignup} />
+                user ? null : login && <Login login={login} setLogin={setLogin} signup={signup} setSignup={setSignup} />
             }
             {
                 signup && <Signup login={login} setLogin={setLogin} signup={signup} setSignup={setSignup} />
