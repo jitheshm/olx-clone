@@ -71,7 +71,7 @@ function App() {
       element: <Sell />
     },
     {
-      path:'/item',
+      path:'/item/:id',
       element:<ViewPost/> 
     }
   ]);

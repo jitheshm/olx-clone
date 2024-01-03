@@ -26,7 +26,7 @@ function Post() {
               return (
                 // eslint-disable-next-line react/jsx-key
                 <div className="card" onClick={() => {
-                  navigate(`/item?id=${product.id}`)
+                  navigate(`/item/${product.id}`)
                 }}>
                   <div className="favorite">
                     <Heart></Heart>
