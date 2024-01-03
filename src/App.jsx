@@ -6,16 +6,19 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Header from './components/Header/Header';
-import { userContext, productContext,firebaseContext } from './store/Context';
+import { userContext, productContext, firebaseContext } from './store/Context';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Create from './components/Create/Create';
 import Sell from './pages/Sell';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import ViewPost from './components/ViewPost/ViewPost';
+import { layoutContext } from './store/Context';
+import ProtectRoute from './util/ProtectRoute';
 function App() {
   const [user, setUser] = useState(null)
   const [products, setProducts] = useState([])
-  const {firebase}=useContext(firebaseContext)
+  const [login, setLogin] = useState(false)
+  const { firebase } = useContext(firebaseContext)
   useEffect(() => {
     try {
       (async function () {
@@ -68,17 +71,20 @@ function App() {
     },
     {
       path: '/create',
-      element: <Sell />
+      element: <ProtectRoute> <Sell /> </ProtectRoute>
     },
-    {
-      path:'/item/:id',
-      element:<ViewPost/> 
+    { 
+      path: '/item/:id',
+      element: <ViewPost />
     }
   ]);
   return (
     <userContext.Provider value={{ user, setUser }}>
       <productContext.Provider value={{ products, setProducts }} >
-        <RouterProvider router={router} />
+        <layoutContext.Provider value={{ login, setLogin }}>
+
+          <RouterProvider router={router} />
+        </layoutContext.Provider>
 
       </productContext.Provider>
 

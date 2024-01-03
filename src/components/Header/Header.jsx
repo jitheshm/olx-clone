@@ -7,12 +7,15 @@ import Login from '../Login/Login'
 import Signup from '../Signup/Signup'
 import { firebaseContext, userContext } from '../../store/Context'
 import { getAuth, signOut } from 'firebase/auth'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { layoutContext } from '../../store/Context'
 function Header() {
-    const [login, setLogin] = useState(false)
+   
     const [signup, setSignup] = useState(false)
     const { user } = useContext(userContext)
     const { firebase } = useContext(firebaseContext)
+    const {login,setLogin}=useContext(layoutContext)
+    const navigate=useNavigate()
     console.log("header" + user);
 
     const handleLogout = async() => {
@@ -20,6 +23,7 @@ function Header() {
             const auth = getAuth(firebase);
             await signOut(auth)
             console.log("successfully logout");
+            navigate('/')
         } catch (error) {
             console.log(error);
         }
