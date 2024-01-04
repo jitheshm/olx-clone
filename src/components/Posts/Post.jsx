@@ -20,12 +20,12 @@ function Post() {
         <div className="heading">
           <span>Fresh recommendations</span>
         </div>
-        <div className="cards">
+        <div className="cards row">
           {
             products.map((product) => {
               return (
                 // eslint-disable-next-line react/jsx-key
-                <div className="card" onClick={() => {
+                <div className="card my-3" onClick={() => {
                   navigate(`/item/${product.id}`)
                 }}>
                   <div className="favorite">
