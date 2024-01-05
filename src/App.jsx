@@ -14,6 +14,7 @@ import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import ViewPost from './components/ViewPost/ViewPost';
 import { layoutContext } from './store/Context';
 import ProtectRoute from './util/ProtectRoute';
+import View from './pages/View';
 function App() {
   const [user, setUser] = useState(null)
   const [products, setProducts] = useState([])
@@ -80,7 +81,7 @@ function App() {
     },
     {
       path: '/item/:id',
-      element: <ViewPost />
+      element: <View />
     }
   ]);
   return (
