@@ -36,7 +36,7 @@ function Login({ login, setLogin, signup, setSignup }) {
                             setEmail(e.target.value)
                         }} />
                         <h5 className='mt-3'>Enter the Password</h5>
-                        <input type="text" style={{ height: '40px' }} value={password} onChange={(e) => {
+                        <input type="password" style={{ height: '40px' }} value={password} onChange={(e) => {
                             setPassword(e.target.value)
                         }} />
                         <button type='submit' className='col-11 mt-4 btn ' style={{ height: '50px', backgroundColor: '#002F34', color: '#ffffff' }}>submit</button>
